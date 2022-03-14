@@ -1,0 +1,48 @@
+package com.example.surnessdemo.pojo.entity;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
+
+import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
+
+/**
+ * role entity
+ * @author tomsun28
+ * @date 00:27 2019-07-27
+ */
+@TableName(value = "auth_role")
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class AuthRoleDO extends Model<AuthRoleDO> {
+
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
+
+    @NotBlank(message = "name can not null")
+    @Length(min = 3, max = 100, message = "name length in 3-100")
+    private String name;
+
+    @NotBlank(message = "code can not null")
+    @Length(min = 3, max = 100, message = "code length in 3-100")
+    private String code;
+
+    @Range(min = 0, max = 9, message = "1 enable, 9 disable")
+    private Integer status;
+
+    private String description;
+
+    private LocalDateTime gmtCreate;
+
+    private LocalDateTime gmtUpdate;
+}

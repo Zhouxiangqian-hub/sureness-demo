@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.surnessdemo.dao.AuthResourceDao">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.surnessdemo.pojo.entity.AuthResourceDO">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="uri" property="uri"/>
+        <result column="type" property="type"/>
+        <result column="method" property="method"/>
+        <result column="status" property="status"/>
+        <result column="description" property="description"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_update" property="gmtUpdate"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+
+    </sql>
+
+    <select id="getDisableResourcePathData" resultType="java.lang.String">
+        select CONCAT(LOWER(resource.uri),'===', resource.method) as disableResourcePath
+        from auth_resource resource
+        where resource.status = 9 order by resource.id
+    </select>
+</mapper>

@@ -1,0 +1,34 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/sureness?useUnicode=true&zeroDateTimeBehavior=convertToNull&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true&useSSL=false
+    username: root
+    password: zxq123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    maxActive: 50
+    initialSize: 20
+    maxWait: 60000
+    minIdle: 20
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 1
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+    removeAbandoned: true
+    removeAbandonedTimeout: 1800
+    #logAbandoned: true
+    filters: stat,wall,slf4j
+    useGlobalDataSourceStat: true
+    default-auto-commit: false
+
+
+#mybatis-plus
+mybatis-plus:
+  type-aliases-package: com.example.surenessdemo.pojo.entity
+  configuration:
+    #开启sql日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 该配置就是将带有下划线的表字段映射为驼峰格式的实体类属性
+    map-underscore-to-camel-case: true
