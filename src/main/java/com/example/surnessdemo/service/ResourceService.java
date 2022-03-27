@@ -1,5 +1,6 @@
 package com.example.surnessdemo.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.surnessdemo.pojo.entity.AuthResourceDO;
 
@@ -54,7 +55,7 @@ public interface ResourceService {
      * @param pageSize page size
      * @return Page of resource
      */
-    Page<AuthResourceDO> getPageResource(Integer currentPage, Integer pageSize);
+    IPage<AuthResourceDO> getPageResource(Integer currentPage, Integer pageSize);
 
     /**
      * get enabled resource-path-role eg: /api/v2/host===post===[role2,role3,role4]

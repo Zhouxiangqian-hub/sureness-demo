@@ -1,6 +1,7 @@
 package com.example.surnessdemo.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.surnessdemo.dao.AuthResourceDao;
 import com.example.surnessdemo.pojo.entity.AuthResourceDO;
@@ -49,22 +50,35 @@ public class ResourceServiceImpl implements ResourceService {
 
     @Override
     public boolean updateResource(AuthResourceDO authResource) {
-        return false;
+        if (authResourceDao.existsById(authResource.getId())) {
+            authResourceDao.updateById(authResource);
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
     @Override
     public boolean deleteResource(Long resourceId) {
-        return false;
+        if (authResourceDao.existsById(resourceId)) {
+            authResourceDao.deleteById(resourceId);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public Optional<List<AuthResourceDO>> getAllResource() {
-        return Optional.empty();
+        List<AuthResourceDO> authResourceDOS = authResourceDao.selectList(null);
+        return Optional.ofNullable(authResourceDOS);
     }
 
     @Override
-    public Page<AuthResourceDO> getPageResource(Integer currentPage, Integer pageSize) {
-        return null;
+    public IPage<AuthResourceDO> getPageResource(Integer currentPage, Integer pageSize) {
+        Page<AuthResourceDO> page = new Page<>(currentPage, pageSize);
+        return authResourceDao.selectPage(page, null);
     }
 
     @Override

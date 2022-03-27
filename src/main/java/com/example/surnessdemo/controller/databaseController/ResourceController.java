@@ -1,5 +1,6 @@
 package com.example.surnessdemo.controller.databaseController;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.surnessdemo.pojo.dto.Message;
 import com.example.surnessdemo.pojo.entity.AuthResourceDO;
@@ -45,6 +46,11 @@ public class ResourceController {
         }
     }
 
+    /**
+     * 更新资源
+     * @param authResource
+     * @return
+     */
     @PutMapping
     public ResponseEntity<Message> updateResource(@RequestBody @Validated AuthResourceDO authResource) {
         if (resourceService.updateResource(authResource)) {
@@ -58,6 +64,11 @@ public class ResourceController {
         }
     }
 
+    /**
+     * 删除资源
+     * @param resourceId
+     * @return
+     */
     @DeleteMapping("/{resourceId}")
     public ResponseEntity<Message> deleteResource(@PathVariable @NotBlank Long resourceId ) {
         if (resourceService.deleteResource(resourceId)) {
@@ -72,6 +83,12 @@ public class ResourceController {
         }
     }
 
+    /**
+     * 查询全部资源-可分页
+     * @param currentPage
+     * @param pageSize
+     * @return
+     */
     @GetMapping("/{currentPage}/{pageSize}")
     public ResponseEntity<Message> getResource(@PathVariable Integer currentPage, @PathVariable Integer pageSize ) {
         if (Objects.isNull(currentPage) || Objects.isNull(pageSize)) {
@@ -86,8 +103,8 @@ public class ResourceController {
             }
         } else {
             // pageable
-            Page<AuthResourceDO> resourcePage = resourceService.getPageResource(currentPage, pageSize);
-            Message message = Message.builder().data(resourcePage.getRecords()).build();
+            IPage<AuthResourceDO> resourcePage = resourceService.getPageResource(currentPage, pageSize);
+            Message message = Message.builder().data(resourcePage).build();
             return ResponseEntity.ok().body(message);
         }
     }

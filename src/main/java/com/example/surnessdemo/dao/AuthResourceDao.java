@@ -65,4 +65,8 @@ public interface AuthResourceDao extends BaseMapper<AuthResourceDO> {
             "(select distinct bind.resource_id from auth_role_resource_bind bind where bind.role_id = #{roleId}) " +
             "order by resource.id asc ")
     List<AuthResourceDO> findRoleNotOwnResource(@Param("roleId") Long roleId);
+
+    @Select("select count(1) from auth_resource resource where resource.id = #{id}")
+    boolean existsById(@Param("id") Long id);
+
 }

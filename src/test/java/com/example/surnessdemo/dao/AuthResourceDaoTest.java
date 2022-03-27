@@ -69,4 +69,11 @@ public class AuthResourceDaoTest extends SuperTest {
                 .eq(AuthResourceDO::getMethod, resource.getMethod()));
         log.info("{}",CollectionUtils.isEmpty(authResourceDOS));
     }
+
+    @Test
+    public void existsById() {
+        boolean b = authResourceDao.existsById(101L);
+        log.info("{}",b);
+
+    }
 }

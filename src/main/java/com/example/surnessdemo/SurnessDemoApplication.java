@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @ServletComponentScan
 @EnableTransactionManagement
-@MapperScan("com.example.surnessdemo.dao")
 public class SurnessDemoApplication {
 
     public static void main(String[] args) {
