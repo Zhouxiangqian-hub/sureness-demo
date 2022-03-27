@@ -1,4 +1,4 @@
-package com.example.surnessdemo.controller.databaseController;
+package com.example.surnessdemo.controller.dsController;
 
 import com.example.surnessdemo.sureness.util.TokenStorage;
 import com.example.surnessdemo.pojo.dto.Account;
@@ -47,6 +47,8 @@ public class AccountController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(message);
         }
         List<String> ownRole = accountService.loadAccountRoles(account.getUsername());
+        //签发jwt
+        //JsonWebTokenUtil.setDefaultSecretKey();
         String jwt = JsonWebTokenUtil.issueJwt(UUID.randomUUID().toString(), account.getUsername(),
                 "tom-auth-server", 3600L, ownRole);
         Map<String, String> responseData = Collections.singletonMap("token", jwt);

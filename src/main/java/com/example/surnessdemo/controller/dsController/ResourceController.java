@@ -1,7 +1,6 @@
-package com.example.surnessdemo.controller.databaseController;
+package com.example.surnessdemo.controller.dsController;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.surnessdemo.pojo.dto.Message;
 import com.example.surnessdemo.pojo.entity.AuthResourceDO;
 import com.example.surnessdemo.service.ResourceService;

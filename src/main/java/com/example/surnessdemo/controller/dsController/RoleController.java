@@ -1,11 +1,10 @@
-package com.example.surnessdemo.controller.databaseController;
+package com.example.surnessdemo.controller.dsController;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.example.surnessdemo.pojo.dto.Message;
 import com.example.surnessdemo.pojo.entity.AuthResourceDO;
 import com.example.surnessdemo.pojo.entity.AuthRoleDO;
 import com.example.surnessdemo.service.RoleService;
-import com.usthe.sureness.provider.annotation.RequiresRoles;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

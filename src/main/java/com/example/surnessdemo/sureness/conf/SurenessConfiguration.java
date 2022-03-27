@@ -1,5 +1,7 @@
 package com.example.surnessdemo.sureness.conf;
 
+import com.example.surnessdemo.sureness.processor.CustomTokenProcessor;
+import com.example.surnessdemo.sureness.subject.CustomTokenSubjectCreator;
 import com.usthe.sureness.DefaultSurenessConfig;
 import com.usthe.sureness.matcher.DefaultPathRoleMatcher;
 import com.usthe.sureness.matcher.PathTreeProvider;
@@ -52,12 +54,15 @@ public class SurenessConfiguration {
     ProcessorManager processorManager(SurenessAccountProvider accountProvider) {
         // 处理器Processor初始化
         List<Processor> processorList = new LinkedList<>();
+
         // 使用了默认的支持NoneSubject的处理器NoneProcessor
         NoneProcessor noneProcessor = new NoneProcessor();
         processorList.add(noneProcessor);
+
         // 使用了默认的支持JwtSubject的处理器JwtProcessor
         JwtProcessor jwtProcessor = new JwtProcessor();
         processorList.add(jwtProcessor);
+
         // 使用了默认支持PasswordSubject的处理器PasswordProcessor
         PasswordProcessor passwordProcessor = new PasswordProcessor();
         // 这里注意，PasswordProcessor需要对用户账户密码验证，所以其需要账户信息提供者来给他提供想要的账户数据，
@@ -65,6 +70,11 @@ public class SurenessConfiguration {
         // 其实现bean是上面讲到的 DatabaseAccountProvider bean,即数据库实现的账户数据提供者。
         passwordProcessor.setAccountProvider(accountProvider);
         processorList.add(passwordProcessor);
+
+        // 使用自定义的tokenProcessor
+        CustomTokenProcessor customTokenProcessor = new CustomTokenProcessor();
+        customTokenProcessor.setAccountProvider(accountProvider);
+        processorList.add(customTokenProcessor);
         return new DefaultProcessorManager(processorList);
     }
 
@@ -102,9 +112,9 @@ public class SurenessConfiguration {
                 new JwtSubjectServletCreator(),
                 new JwtSubjectWsServletCreator(),
                 // 注册用来创建DigestSubject的creator
-                new DigestSubjectServletCreator()
+                new DigestSubjectServletCreator(),
                 // 当然也可以自己实现一个自定义的creator，实现SubjectCreate接口即可
-                //new CustomPasswdSubjectCreator()
+                new CustomTokenSubjectCreator()
                 )
         );
         return subjectFactory;
