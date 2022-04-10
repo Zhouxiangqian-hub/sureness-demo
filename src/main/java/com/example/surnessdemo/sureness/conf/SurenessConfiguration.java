@@ -46,6 +46,21 @@ public class SurenessConfiguration {
         return new DefaultSurenessConfig();
     }
 
+
+    @Bean
+    SurenessSecurityManager securityManager(ProcessorManager processorManager,
+                                            TreePathRoleMatcher pathRoleMatcher, SubjectFactory subjectFactory) {
+        // 我们把上面初始化好的配置bean整合到一起初始化surenessSecurityManager
+        SurenessSecurityManager securityManager = SurenessSecurityManager.getInstance();
+        // 设置资源权限匹配者
+        securityManager.setPathRoleMatcher(pathRoleMatcher);
+        // 设置subject创建工厂
+        securityManager.setSubjectFactory(subjectFactory);
+        // 设置处理器processor管理者
+        securityManager.setProcessorManager(processorManager);
+        return securityManager;
+    }
+
     /**
      * sureness custom config
      * 不使用默认配置，使用自定义配置来配置sureness的特性
@@ -123,19 +138,7 @@ public class SurenessConfiguration {
         return subjectFactory;
     }
 
-    @Bean
-    SurenessSecurityManager securityManager(ProcessorManager processorManager,
-                                            TreePathRoleMatcher pathRoleMatcher, SubjectFactory subjectFactory) {
-        // 我们把上面初始化好的配置bean整合到一起初始化surenessSecurityManager
-        SurenessSecurityManager securityManager = SurenessSecurityManager.getInstance();
-        // 设置资源权限匹配者
-        securityManager.setPathRoleMatcher(pathRoleMatcher);
-        // 设置subject创建工厂
-        securityManager.setSubjectFactory(subjectFactory);
-        // 设置处理器processor管理者
-        securityManager.setProcessorManager(processorManager);
-        return securityManager;
-    }
+
 
 
 
