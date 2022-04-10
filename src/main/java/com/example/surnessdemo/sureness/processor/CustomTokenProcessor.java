@@ -59,6 +59,7 @@ public class CustomTokenProcessor extends BaseProcessor {
             // if expired time is not longer than refreshPeriodTime/2 , it can refresh
             if (Long.parseLong(tokenArr[START_TIME_INDEX]) + (Long.parseLong(tokenArr[PERIOD_TIME_INDEX]) * DOUBLE_TIME)
                     >= System.currentTimeMillis()) {
+                // 36秒过期
                 long refreshPeriodTime = 36000L;
                 String refreshToken = tokenArr[0] + TOKEN_SPLIT + System.currentTimeMillis()
                         + TOKEN_SPLIT + refreshPeriodTime

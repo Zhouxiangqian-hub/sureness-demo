@@ -1,6 +1,7 @@
 package com.example.surnessdemo.sureness.conf;
 
 import com.example.surnessdemo.sureness.processor.CustomTokenProcessor;
+import com.example.surnessdemo.sureness.subject.CustomPasswdSubjectCreator;
 import com.example.surnessdemo.sureness.subject.CustomTokenSubjectCreator;
 import com.usthe.sureness.DefaultSurenessConfig;
 import com.usthe.sureness.matcher.DefaultPathRoleMatcher;
@@ -113,6 +114,8 @@ public class SurenessConfiguration {
                 new JwtSubjectWsServletCreator(),
                 // 注册用来创建DigestSubject的creator
                 new DigestSubjectServletCreator(),
+                // 使用自定义的password creator
+                new CustomPasswdSubjectCreator(),
                 // 当然也可以自己实现一个自定义的creator，实现SubjectCreate接口即可
                 new CustomTokenSubjectCreator()
                 )
